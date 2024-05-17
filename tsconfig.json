@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": [
+      "esnext",
+      "ES2017.String",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "allowJs": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "rootDir": "./",
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    // "jsxImportSource": "react",
+    "importHelpers": true,
+    "noImplicitThis": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "src/types/images.d.ts",
+      "@types",
+    ],                                  /* Specify multiple folders that act like './node_modules/@types'. */
+  },
+  "extends": "./tsconfig.paths.json",
+  "include": [
+    "src/**/*.tsx",
+    "src/**/*.jsx",
+    "src/types/images.d.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
