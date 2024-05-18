@@ -38,6 +38,7 @@
   "include": [
     "src/**/*.tsx",
     "src/**/*.jsx",
+    "src/**/*.ts",
     "src/types/images.d.ts",
   ],
   "exclude": [
