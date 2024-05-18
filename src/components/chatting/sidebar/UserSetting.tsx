@@ -43,6 +43,7 @@ const ProfileName = styled.div`
     white-space: nowrap;
 `
 
+// 2024/05/18 현재 사용하지 않음
 const UserSetting = () => {
     return (
         /* 유저 정보 및 설정 진입 부분 */
@@ -60,7 +61,7 @@ const UserSetting = () => {
                         />
                     </ProfileImg>
                     <ProfileName>
-                        <div>준서 김</div>
+                        <div></div>
                     </ProfileName>
                 </div>
             </UserInfo>

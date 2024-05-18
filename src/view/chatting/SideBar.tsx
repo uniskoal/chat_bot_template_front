@@ -29,7 +29,8 @@ const SideBar = () => {
         <Aside style={ { width: (isShownSideBar) ? '300px' : '0px' , visibility: (isShownSideBar) ? 'visible' : 'hidden' }}>
             <Nav>
                 <ChattingHistoryContainer/>
-                <UserSetting/>
+                {/* 2024/05/18 현재 사용하지 않음 */}
+                {/* <UserSetting/> */}
             </Nav>
         </Aside>
     )
