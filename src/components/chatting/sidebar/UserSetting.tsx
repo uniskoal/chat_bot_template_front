@@ -1,5 +1,5 @@
 import profileImg from "$images/profileImg.jpg"
-import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection } from "@/styles/CommonStyles";
+import { ProfileImg, decideWidthAndHeight, flexAlignCenter, flexColumnDirection } from "@/styles/CommonStyles";
 import styled from "styled-components";
 
 const UserInfoContainer = styled.div`
@@ -23,14 +23,6 @@ const UserInfo = styled.div`
         gap: 0.5rem;
         max-width: 100%;
     }
-`
-
-const ProfileImg = styled.div`
-    ${ flexAlignCenter };
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 9999px;
-    flex-shrink: 0;
 `
 
 const ProfileName = styled.div`

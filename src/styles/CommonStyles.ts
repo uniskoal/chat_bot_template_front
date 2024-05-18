@@ -73,4 +73,15 @@ export const SvgIcon = styled.svg`
     strokeWidth: 1.5;
 `
 
+/**
+ * @description 원래는 유저 프로필 이미지 용이었으나 24/05/18 이후로 유저 아이콘으로 변경
+ */
+export const ProfileImg = styled.div`
+    ${ flexAlignCenter };
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 9999px;
+    flex-shrink: 0;
+`
+
 
