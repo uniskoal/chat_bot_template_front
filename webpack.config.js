@@ -25,11 +25,11 @@ module.exports = {
         port: 3000,
         proxy: [
             {
-              context: ['**'],
-              secure: false,
-              target: 'http://127.0.0.1:8000',
+              context: ['/Item'],
+              target: 'http://localhost:8000',
+              changeOrigin: true
             },
-          ],
+        ],
     },
 
     module: {
