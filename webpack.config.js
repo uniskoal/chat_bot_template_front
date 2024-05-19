@@ -23,13 +23,6 @@ module.exports = {
         },
         compress: true,
         port: 3000,
-        proxy: [
-            {
-              context: ['/Item'],
-              target: 'http://localhost:8000',
-              changeOrigin: true
-            },
-        ],
     },
 
     module: {

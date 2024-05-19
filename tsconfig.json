@@ -39,6 +39,7 @@
     "src/**/*.tsx",
     "src/**/*.jsx",
     "src/**/*.ts",
+    "src/**/*.js",
     "src/types/images.d.ts",
   ],
   "exclude": [
