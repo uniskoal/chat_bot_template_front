@@ -1,4 +1,4 @@
-import chatGptIcon from "$images/chatgptIcon.png"
+import chatSinSungIcon from "$images/shinsungIcon.png"
 import styled from "styled-components"
 import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection, stickyPositionStyle } from "@/styles/CommonStyles";
 import ChattingHistory from "./ChattingHistory";
@@ -60,8 +60,8 @@ const NewChattingButton = styled.a`
 
 const ChattingBotIcon = styled.div`
     ${ decideWidthAndHeight('1.75rem','1.75rem') };
+    ${ flexAlignCenter };
     flex-shrink: 0;
-    margin-top: 0.3rem;
 
     img {
         border-radius: 50%;
@@ -81,9 +81,9 @@ const ChattingHistoryContainer = () => {
                     <NewChattingButton href="/">
                         <ChattingBotIcon>
                             <img 
-                                src={chatGptIcon}
-                                width="23px"
-                                height="23px"
+                                src={chatSinSungIcon}
+                                width="26px"
+                                height="21px"
                             />
                         </ChattingBotIcon>
                         <ChattingBotMessage>
@@ -94,9 +94,6 @@ const ChattingHistoryContainer = () => {
             </NewChattingContainer>
             {/* --------------- */}
             {/* 채팅 내역 목록 */}
-            <ChattingHistory/>
-            <ChattingHistory/>
-            <ChattingHistory/>
             <ChattingHistory/>
             {/* --------------- */}
         </ChattingListContainer>

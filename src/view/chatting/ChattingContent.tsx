@@ -8,6 +8,7 @@ import axios from '@/api/axiosHandler';
 import ChattingContentComponent from "@/components/chatting/mainContent/ChattingContentComponent"
 import { ChattingContentComponentPropsType } from "@/types/components/chattingContentComponent"
 import { ChattingContentUserType } from "@/constants/enum";
+import { keyDownEnter } from "@/helper/keyDownEventList"
 
 const ChattingMainContentContainer = styled.main`
     ${ decideWidthAndHeight('100%' ,'100%') };
@@ -41,7 +42,6 @@ const ChattingMainContent = styled.div`
 
 const ChattingMainScroll = styled.div`
     ${ decideWidthAndHeight('100%' , '100%') };
-    overflow-y: auto;
     padding-bottom: 2.25rem;
 
     &::-webkit-scrollbar {
@@ -278,7 +278,7 @@ const ChattingContent = () => {
                     {/* 결과 목록 */}
                     <div>
                         <div>
-                            <ChattingMainScroll>
+                            <ChattingMainScroll style={ { overflowY: (chatList.length > 0) ? 'scroll' : 'hidden'}}> 
                                 {/* 헤더 [옵션 및 GPT 모델 변경] */}
                                 <ChattingMainHeaderView/>
                                 {/* 채팅 내용 및 메인 화면 */}
@@ -286,7 +286,7 @@ const ChattingContent = () => {
                                 ? 
                                     chatList.map((component , index) => <div key={index}>{component}</div>)
                                 :
-                                    <MainFirstView/>
+                                   <MainFirstView/>
                                 }
                             </ChattingMainScroll>
                         </div>
@@ -320,9 +320,10 @@ const ChattingContent = () => {
                                                     placeholder="질문을 입력해 주세요"
                                                     value={questionContent}
                                                     onChange={handleQuestionContent}
+                                                    onKeyDown={event => keyDownEnter(event , submitQuestion)}
                                                 ></ChattingTextArea>
                                                 <ChattingSubmitButton
-                                                    type="button" 
+                                                    type="button"
                                                     disabled={!questionContent}
                                                     onClick={submitQuestion}
                                                 >

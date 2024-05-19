@@ -45,10 +45,10 @@ const ChattingHistory = () => {
                 </div>
                 <ol>
                     <ChattingHistoryItem/>
+                    {/* <ChattingHistoryItem/>
                     <ChattingHistoryItem/>
                     <ChattingHistoryItem/>
-                    <ChattingHistoryItem/>
-                    <ChattingHistoryItem/>
+                    <ChattingHistoryItem/> */}
                 </ol>
             </NewChattingList>
         </NewChattingListContainer>

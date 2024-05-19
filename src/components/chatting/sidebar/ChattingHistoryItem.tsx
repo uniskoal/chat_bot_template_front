@@ -57,7 +57,7 @@ const ChattingHistoryItem = () => {
             <ChattingTitleContainer>
                 <a href="/">
                     <ChattingTitle>
-                        자바스크립트 실행 과정에서 발생하는 일들에
+                        채팅 목록[구현 준비 중]
                         <ChattingSideMenuButtonContainer></ChattingSideMenuButtonContainer>
                     </ChattingTitle>
                 </a>
