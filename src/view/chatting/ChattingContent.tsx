@@ -244,7 +244,7 @@ const ChattingContent = () => {
         /** 질문 저장 */
         saveUserChatContent({ userType: ChattingContentUserType.USER , description: questionContent})
         /** 입력한 질문 GPT 에게 요청 / 파라미터/응답 값은 임시로 정해놨음 */
-        const response: { data: { description: string } } = await axios.post('/item' , { id: '1' , description: questionContent });
+        const response: { data: { description: string } } = await axios.post('/Item' , { id: '1' , description: questionContent });
         /** 응답받은 답변 저장 */
         saveUserChatContent({ userType: ChattingContentUserType.GPT , description: response.data.description})
         
