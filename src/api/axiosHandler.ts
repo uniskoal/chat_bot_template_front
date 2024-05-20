@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const axiosHandler: AxiosInstance = axios.create({
-    baseURL: 'https://d85f2f3c-ed02-49f1-9874-cceba75d7796.mock.pstmn.io',
+    baseURL: 'http://localhost:8000',
     timeout: 0,
     headers: {
         'Content-Type': 'application/json',
