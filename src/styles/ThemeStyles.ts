@@ -1,6 +1,12 @@
 const ThemeStyles = (() => {
     
     const darkThemeOriginal = {
+        // 메인 화면
+        menuBoxBorderColor: 'hsla(0,0%,100%,.1)',           // 메인 화면 메뉴 박스 테두리 색
+        menuBoxBorderShadowColor: 'rgba(0,0,0,0.4)',        // 메인 화면 메뉴 박스 그림자 색
+        menuBoxBorderShadowSpread: '16px',                  // 메인 화면 메뉴 박스 그림자 퍼짐 정도
+        menuBoxDescriptionColor: '#fff',                    // 메인 화면 메뉴 설명 텍스트 색
+        // 챗봇 화면
         fontColor: '#fff',
         sidebarBackgroundColor: '#171717',                  // 좌측 사이드바 배경색
         sidebarBackgroundColorHover: '#212121',             // 좌측 사이드바 목록에 마우스를 올렸을 때의 배경색
@@ -19,6 +25,12 @@ const ThemeStyles = (() => {
     }
 
     const lightThemeOriginal = {
+        // 메인 화면
+        menuBoxBorderColor: 'rgba(0,0,0,.1)',
+        menuBoxBorderShadowColor: 'rgba(0,0,0,0.05)',
+        menuBoxBorderShadowSpread: '7px',
+        menuBoxDescriptionColor: 'rgba(109,109,109,1)',
+        // 챗봇 화면
         fontColor: '#000',
         sidebarBackgroundColor: '#f9f9f9',
         sidebarBackgroundColorHover: '#ececec',
