@@ -1,10 +1,9 @@
-import { decideWidthAndHeight } from "@/styles/CommonStyles";
-import ThemeStyles from "@/styles/ThemeStyles";
-import styled, { ThemeProvider } from "styled-components";
-import SideBar from "./view/chatting/SideBar";
-import ChattingContent from "./view/chatting/ChattingContent";
+import { Outlet } from "react-router-dom";
+import { ThemeProvider, styled } from "styled-components";
+import { decideWidthAndHeight } from "./styles/CommonStyles";
 import { useRecoilState } from "recoil";
 import { themeState } from "./store/commonStore";
+import ThemeStyles from "./styles/ThemeStyles";
 
 const Container = styled.div`
     ${ decideWidthAndHeight('100%' , '100%') }
@@ -14,21 +13,19 @@ const Container = styled.div`
     color: ${ props => props.theme.fontColor}
 `
 
-const ChattingAiContainer = (): JSX.Element => {
+const App = () => {
     /** 라이트/다크 모드 제어용 상태 */
     const [ theme ] = useRecoilState(themeState);
-
-
+    
     return (
         <>
             <ThemeProvider theme={theme ? ThemeStyles.lightTheme : ThemeStyles.darkTheme}>
                 <Container>
-                    <SideBar/>
-                    <ChattingContent/>
+                    <Outlet/>
                 </Container>
             </ThemeProvider>
         </>
     )
 }
 
-export default ChattingAiContainer;
+export default App;
