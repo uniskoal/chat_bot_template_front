@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import NEXONGothicWOFF from "@/assets/fonts/NEXON_Lv2_Gothic.woff";
 
 const GlobalStyle = createGlobalStyle`
 /* reset.css */
@@ -116,6 +117,15 @@ button {
 a {
     color: inherit;
     text-decoration: inherit;
+}
+
+/** 폰트 **/
+
+@font-face {
+    font-family: 'Custom Gothic';
+    src: local('Custom Gothic'), url(${NEXONGothicWOFF}) format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /**
