@@ -1,8 +1,9 @@
 import useChangeTheme from "@/hooks/useChangeTheme";
-import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection, flexJustifyCenter, flexJustifyEnd } from "@/styles/CommonStyles";
+import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection, flexJustifyCenter, flexJustifyEnd, textBase } from "@/styles/CommonStyles";
 import { HeaderOptionButton, HeaderOptionsContainer } from "@/styles/componentStyles/headerButtonStyles";
 import { styled } from "styled-components";
 import mainIcon from "@/assets/images/main/shunsungMain.png";
+import useMenuNavigation from "@/hooks/useMenuNavigation";
 
 const MainViewContainer = styled.div`
     ${ decideWidthAndHeight('100%' , '100%') };
@@ -60,9 +61,9 @@ const MenuTitle = styled.div`
 `
 const MenuDescription = styled.p`
     ${ decideWidthAndHeight('100%' , '')};
+    ${ textBase('15px' , '1.25rem') };
     text-align: left;
     font-family: 'Custom Gothic';
-    font-size: 15px;
     padding-left: 0.25rem;
     color: ${ props => props.theme.menuBoxDescriptionColor };
 `
@@ -70,6 +71,8 @@ const MenuDescription = styled.p`
 const MainView = () => {
     /** 라이트/다크 모드 제어용 상태 */
     const { theme , changeTheme } = useChangeTheme();
+    /** 메뉴 이동 */
+    const { navigateChatBotMenu } = useMenuNavigation();
     
     return (
         <MainViewContainer>
@@ -97,7 +100,7 @@ const MainView = () => {
                 {/* 메뉴 */}
                 <section>
                     <MainMenuListContainer>
-                        <MenuButton>
+                        <MenuButton onClick={navigateChatBotMenu}>
                             <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 48 48">
                                 <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
                                     <path d="M226 425 c-4 -10 -19 -15 -49 -15 -24 0 -48 -5 -55 -12 -7 -7 -12
