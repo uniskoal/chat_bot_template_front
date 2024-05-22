@@ -27,7 +27,7 @@ const MainContentContainer = styled.div`
 `
 const MainMenuListContainer = styled.div`
     ${ flexJustifyCenter };
-    min-height: 16rem;
+    min-height: 14rem;
     align-items: stretch;
     flex-wrap: wrap;
     gap: 2rem;
@@ -38,27 +38,32 @@ const MenuButton = styled.button`
     ${ flexColumnDirection };
     gap: 1rem;
     width: 22rem;
-    padding: 0.5rem 0.75rem 1rem 0.75rem;
+    padding: 1.25rem;
     border-width: 1px;
     border-top: 1rem solid #004EA2;
     border-radius: 0.75rem;
-    box-shadow: 4px 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 4px 4px 7px rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
 
     &:hover {
         transform: translate(-2px , -10px);
     }
+`
 
-    & > svg {
-        margin: auto;
-    }
-
-    & > div {
-        ${ decideWidthAndHeight('100%' , '')};
-        font-size: 24px;
-        font-weight: bold;
-        padding-bottom: 3rem;
-    }
+const MenuTitle = styled.div`
+    ${ decideWidthAndHeight('100%' , '')};
+    text-align: left;
+    font-family: 'Custom Gothic';
+    font-size: 22px;
+    padding-left: 0.25rem;
+`
+const MenuDescription = styled.p`
+    ${ decideWidthAndHeight('100%' , '')};
+    text-align: left;
+    font-family: 'Custom Gothic';
+    font-size: 15px;
+    padding-left: 0.25rem;
+    color: rgba(109,109,109,1);
 `
 
 const MainView = () => {
@@ -92,24 +97,28 @@ const MainView = () => {
                 <section>
                     <MainMenuListContainer>
                         <MenuButton>
-                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M4 3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1v2a1 1 0 0 0 1.707.707L9.414 13H15a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4Z" clip-rule="evenodd"/>
-                                <path fill-rule="evenodd" d="M8.023 17.215c.033-.03.066-.062.098-.094L10.243 15H15a3 3 0 0 0 3-3V8h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1v2a1 1 0 0 1-1.707.707L14.586 18H9a1 1 0 0 1-.977-.785Z" clip-rule="evenodd"/>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                                <path fillRule="evenodd" d="M4 3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1v2a1 1 0 0 0 1.707.707L9.414 13H15a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4Z" clipRule="evenodd"/>
+                                <path fillRule="evenodd" d="M8.023 17.215c.033-.03.066-.062.098-.094L10.243 15H15a3 3 0 0 0 3-3V8h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1v2a1 1 0 0 1-1.707.707L14.586 18H9a1 1 0 0 1-.977-.785Z" clipRule="evenodd"/>
                             </svg>
-                            <div>챗봇</div>
+                            <MenuTitle>챗봇</MenuTitle>
+                            <MenuDescription>기업 내부 정보를<br/> 빠르게 검색할 수 있는 AI 채팅입니다</MenuDescription>
                         </MenuButton>
                         <MenuButton>
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z" clip-rule="evenodd"/>
-                        </svg>
-                        <div>문서</div>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                                <path fillRule="evenodd" d="M4 3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1v2a1 1 0 0 0 1.707.707L9.414 13H15a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4Z" clipRule="evenodd"/>
+                                <path fillRule="evenodd" d="M8.023 17.215c.033-.03.066-.062.098-.094L10.243 15H15a3 3 0 0 0 3-3V8h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1v2a1 1 0 0 1-1.707.707L14.586 18H9a1 1 0 0 1-.977-.785Z" clipRule="evenodd"/>
+                            </svg>
+                            <MenuTitle>챗봇</MenuTitle>
+                            <MenuDescription>기업 내부 정보를<br/> 빠르게 검색할 수 있는 AI 채팅입니다</MenuDescription>
                         </MenuButton>
                         <MenuButton>
-                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M4 3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1v2a1 1 0 0 0 1.707.707L9.414 13H15a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4Z" clip-rule="evenodd"/>
-                                <path fill-rule="evenodd" d="M8.023 17.215c.033-.03.066-.062.098-.094L10.243 15H15a3 3 0 0 0 3-3V8h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1v2a1 1 0 0 1-1.707.707L14.586 18H9a1 1 0 0 1-.977-.785Z" clip-rule="evenodd"/>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                                <path fillRule="evenodd" d="M4 3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1v2a1 1 0 0 0 1.707.707L9.414 13H15a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4Z" clipRule="evenodd"/>
+                                <path fillRule="evenodd" d="M8.023 17.215c.033-.03.066-.062.098-.094L10.243 15H15a3 3 0 0 0 3-3V8h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1v2a1 1 0 0 1-1.707.707L14.586 18H9a1 1 0 0 1-.977-.785Z" clipRule="evenodd"/>
                             </svg>
-                            <div>준비 중...</div>
+                            <MenuTitle>챗봇</MenuTitle>
+                            <MenuDescription>기업 내부 정보를<br/> 빠르게 검색할 수 있는 AI 채팅입니다</MenuDescription>
                         </MenuButton>
                     </MainMenuListContainer>
                 </section>

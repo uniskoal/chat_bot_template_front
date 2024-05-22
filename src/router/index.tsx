@@ -1,7 +1,7 @@
 import App from "@/App";
 import ChattingAiContainer from "@/view/chatting/ChattingAiContainer";
 import MainView from "@/view/main/MainView";
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 
 
 const router = createBrowserRouter([
@@ -9,6 +9,9 @@ const router = createBrowserRouter([
         path: '/',
         element: <App/>,
         children: [
+            {
+                index: true, element: <Navigate to="/main" replace />,
+            },
             {
                 path: '/main',
                 element: <MainView/>,
