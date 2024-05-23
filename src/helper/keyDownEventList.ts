@@ -4,8 +4,11 @@
  * @param callback 엔터키 입력 시 실행할 함수
  */
 export const keyDownEnter = (event: React.KeyboardEvent<HTMLElement> , callback: VoidFunction) => {
-    /** 기존 이벤트 방지 */
-    event.preventDefault();
-    /** 함수 실행 */
-    if(event.key === 'Enter') callback();
+    
+    if(event.key === 'Enter') { 
+        /** 기존 이벤트 방지 */
+        event.preventDefault();
+        /** 함수 실행 */
+        callback() 
+    };
 }

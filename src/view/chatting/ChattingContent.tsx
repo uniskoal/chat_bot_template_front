@@ -243,13 +243,12 @@ const ChattingContent = () => {
     const submitQuestion = async () => {
         /** 질문 저장 */
         saveUserChatContent({ userType: ChattingContentUserType.USER , description: questionContent})
+        /** 질문 내용 초기화 */
+        setQuestionContent('');
         /** 입력한 질문 GPT 에게 요청 / 파라미터/응답 값은 임시로 정해놨음 */
         const response: { data: { description: string } } = await axios.post('/Item/' , { id: '1' , description: questionContent });
         /** 응답받은 답변 저장 */
         saveUserChatContent({ userType: ChattingContentUserType.GPT , description: response.data.description})
-        
-        /** 질문 내용 초기화 */
-        setQuestionContent('');
     }
 
     /** 채팅 높이가 최대 영역에 달했을 때 스크롤 바가 생기도록 이벤트 설정 */
