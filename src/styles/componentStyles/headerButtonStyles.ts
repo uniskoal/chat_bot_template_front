@@ -5,6 +5,7 @@ import { decideWidthAndHeight, flexAlignCenter } from "../CommonStyles";
 export const HeaderOptionsContainer = styled.div`
     display: flex;
     gap: 0.5rem;
+    padding-top: 0.25rem;
     padding-right: 0.25rem;
 `
 
