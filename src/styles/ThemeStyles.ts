@@ -2,6 +2,7 @@ const ThemeStyles = (() => {
     
     const darkThemeOriginal = {
         // 메인 화면
+        menuBoxIconColor: 'invert(100%) brightness(100%);', // 메인 화면 메뉴 박스 아이콘 색
         menuBoxBorderColor: 'hsla(0,0%,100%,.1)',           // 메인 화면 메뉴 박스 테두리 색
         menuBoxBorderShadowColor: 'rgba(0,0,0,0.4)',        // 메인 화면 메뉴 박스 그림자 색
         menuBoxBorderShadowSpread: '16px',                  // 메인 화면 메뉴 박스 그림자 퍼짐 정도
@@ -26,6 +27,7 @@ const ThemeStyles = (() => {
 
     const lightThemeOriginal = {
         // 메인 화면
+        menuBoxIconColor: 'invert(100%) brightness(0%);',
         menuBoxBorderColor: 'rgba(0,0,0,.1)',
         menuBoxBorderShadowColor: 'rgba(0,0,0,0.05)',
         menuBoxBorderShadowSpread: '7px',
