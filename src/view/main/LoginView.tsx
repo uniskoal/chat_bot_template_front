@@ -19,7 +19,7 @@ const LoginViewContainer = styled.div`
 
     & > img {
         ${ decideWidthAndHeight('250px' , '') };
-        margin-top: 5rem;
+        margin-top: 5.75rem;
         margin-left: auto;
         margin-right: auto;
         object-fit: contain;
