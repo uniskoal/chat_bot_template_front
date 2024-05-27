@@ -124,12 +124,12 @@ const MainView = () => {
                         <MenuButton onClick={navigateChatBotMenu} svg={chatbot}>
                             <img/>
                             <MenuTitle>챗봇</MenuTitle>
-                            <MenuDescription>기업 내부 정보를<br/> 빠르게 검색할 수 있는 AI 채팅입니다</MenuDescription>
+                            <MenuDescription>기업 내부 정보를<br/> 빠르게 알려주는 챗봇입니다</MenuDescription>
                         </MenuButton>
                         <MenuButton svg={qna} marginLeft>
                             <img/>
                             <MenuTitle>Q&A</MenuTitle>
-                            <MenuDescription>키워드를 입력하시면<br/>해당 키워드와 연관된 답변을 출력해줍니다.</MenuDescription>
+                            <MenuDescription>키워드를 입력하시면<br/>해당 키워드와 연관된 질문과 답변을 출력해줍니다.</MenuDescription>
                         </MenuButton>
                         <MenuButton svg={searchDocument} marginLeft>
                             <img/>
