@@ -13,9 +13,16 @@ const useMenuNavigation = () => {
     const navigateChatBotMenu = () => {
         navigate('/chat');
     }
+
+    /** 로그인 화면으로 이동 */
+    const navigateLogin = () => {
+        navigate('/login');
+    }
+
     return {
         navigateMain,
-        navigateChatBotMenu
+        navigateChatBotMenu,
+        navigateLogin
     }
 }
 

@@ -1,5 +1,6 @@
 import App from "@/App";
 import ChattingAiContainer from "@/view/chatting/ChattingAiContainer";
+import LoginView from "@/view/main/LoginView";
 import MainView from "@/view/main/MainView";
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
@@ -14,15 +15,18 @@ const router = createBrowserRouter([
             },
             {
                 path: '/main',
-                element: <MainView/>,
+                element: <MainView/>
+            },
+            {
+                path: '/login',
+                element: <LoginView/>
             },
             {
                 path: '/chat',
-                element: <ChattingAiContainer/>,
+                element: <ChattingAiContainer/>
             }
         ]
     },
-    
 ])
 
 export default router

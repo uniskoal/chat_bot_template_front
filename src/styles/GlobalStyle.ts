@@ -77,6 +77,16 @@ textarea {
     background-color: #fff;
 }
 
+input {
+    border-radius: 0;
+    border: none;
+    background: 0 0;
+    appearance: none;
+    outline: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 textarea {
     resize: vertical;
 }

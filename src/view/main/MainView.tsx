@@ -10,6 +10,7 @@ const MainViewContainer = styled.div`
     ${ flexColumnDirection };
     background-color: ${ props => props.theme.mainViewBackgroundColor }
 `
+
 const MainHeaderContainer = styled.div`
     ${ decideWidthAndHeight('' , '3.5rem')};
     ${ flexJustifyEnd };
@@ -72,17 +73,24 @@ const MainView = () => {
     /** 라이트/다크 모드 제어용 상태 */
     const { theme , changeTheme } = useChangeTheme();
     /** 메뉴 이동 */
-    const { navigateChatBotMenu } = useMenuNavigation();
+    const { navigateChatBotMenu , navigateLogin } = useMenuNavigation();
     
     return (
         <MainViewContainer>
             {/* 헤더 영역 [사용자 로그인 / 다크 테마] */}
             <MainHeaderContainer>
                 <HeaderOptionsContainer>
+                    <HeaderOptionButton onClick={navigateLogin}>
+                        <div title="로그인">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path fillRule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clipRule="evenodd"/>
+                            </svg>
+                        </div>
+                    </HeaderOptionButton>
                     <HeaderOptionButton onClick={changeTheme}>
-                        <div>
+                        <div title="테마 변경">
                             { theme ? 
-                                <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fillRule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clipRule="evenodd"/>
                                 </svg>
                                 :
