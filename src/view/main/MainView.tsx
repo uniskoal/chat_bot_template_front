@@ -7,6 +7,7 @@ import chatbot from "@/assets/images/main/main_chatbot_icon.svg";
 import searchDocument from "@/assets/images/main/searchDocument.svg";
 import qna from "@/assets/images/main/qna.svg";
 import useMenuNavigation from "@/hooks/useMenuNavigation";
+import useModal from "@/hooks/modal/useModal";
 
 const MainViewContainer = styled.div`
     ${ decideWidthAndHeight('100%' , '100%') };
@@ -39,7 +40,7 @@ const MainMenuListContainer = styled.div`
     margin-left: 0.75rem;
     margin-right: 0.75rem;
 `
-const MenuButton = styled.button<{ svg: any , marginLeft?: boolean}>`
+const MenuButton = styled.button<{ svg: any , $marginLeft?: boolean}>`
     ${ flexColumnDirection };
     gap: 1rem;
     width: 22rem;
@@ -56,7 +57,7 @@ const MenuButton = styled.button<{ svg: any , marginLeft?: boolean}>`
     }
 
     & > img {
-        margin-left: ${ props => props.marginLeft ? '0.3rem' : '' };
+        margin-left: ${ props => props.$marginLeft ? '0.3rem' : '' };
         width: 40px;
         height: 40px;
         background: url(${props => props.svg}) no-repeat center;
@@ -69,7 +70,6 @@ const MenuButton = styled.button<{ svg: any , marginLeft?: boolean}>`
 const MenuTitle = styled.div`
     ${ decideWidthAndHeight('100%' , '')};
     text-align: left;
-    font-family: 'Custom Gothic';
     font-size: 22px;
     padding-left: 0.25rem;
 `
@@ -77,7 +77,6 @@ const MenuDescription = styled.p`
     ${ decideWidthAndHeight('100%' , '')};
     ${ textBase('15px' , '1.25rem') };
     text-align: left;
-    font-family: 'Custom Gothic';
     padding-left: 0.25rem;
     color: ${ props => props.theme.menuBoxDescriptionColor };
 `
@@ -87,6 +86,8 @@ const MainView = () => {
     const { theme , changeTheme } = useChangeTheme();
     /** 메뉴 이동 */
     const { navigateChatBotMenu , navigateLogin } = useMenuNavigation();
+    /** 모달 제어 */
+    const { openGuideModal , openReferencesModal } = useModal();
     
     return (
         <MainViewContainer>
@@ -126,18 +127,20 @@ const MainView = () => {
                             <MenuTitle>챗봇</MenuTitle>
                             <MenuDescription>기업 내부 정보를<br/> 빠르게 알려주는 챗봇입니다</MenuDescription>
                         </MenuButton>
-                        <MenuButton svg={qna} marginLeft>
+                        <MenuButton svg={qna} $marginLeft>
                             <img/>
                             <MenuTitle>Q&A</MenuTitle>
                             <MenuDescription>키워드를 입력하시면<br/>해당 키워드와 연관된 질문과 답변을 출력해줍니다.</MenuDescription>
                         </MenuButton>
-                        <MenuButton svg={searchDocument} marginLeft>
+                        <MenuButton svg={searchDocument} $marginLeft>
                             <img/>
                             <MenuTitle>문서 검색</MenuTitle>
                             <MenuDescription>찾고자 하는 키워드 및 내용을 입력해주시면<br/>해당 내용에 적합한 문서를 찾아줍니다.</MenuDescription>
                         </MenuButton>
                     </MainMenuListContainer>
                 </section>
+                <button type="button" onClick={openGuideModal}>모달 열기[오버레이 O]</button>
+                <button type="button" onClick={openReferencesModal}>모달 열기[오버레이 X]</button>
             </MainContentContainer>
         </MainViewContainer>
     )

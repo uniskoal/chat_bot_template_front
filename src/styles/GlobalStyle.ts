@@ -34,7 +34,6 @@ time, mark, audio, video {
 /* HTML5 display-role reset for older browsers */
 
 html,body,article {
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important; 
     font-size: 16px;
     width: 100%;
     height: 100%;
