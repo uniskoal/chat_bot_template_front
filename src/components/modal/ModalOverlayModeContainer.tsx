@@ -38,6 +38,7 @@ const ModalDescriptionContainer = styled.div`
     word-wrap: break-word;
     overflow-y: auto;
     color: ${ props => props.theme.fontColor };
+    white-space: pre-wrap;
 
     & > span {
         ${ textBase('1rem', '1.4rem')};
