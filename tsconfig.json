@@ -40,7 +40,7 @@
     "src/**/*.jsx",
     "src/**/*.ts",
     "src/**/*.js",
-    "src/types/images.d.ts",
+    "src/types/*",
   ],
   "exclude": [
     "node_modules"

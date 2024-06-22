@@ -51,6 +51,14 @@ export const flexJustifyEnd = css`
 `
 
 /**
+ * @description flex 디자인 적용시에 justify-content 속성을 space-between로 적용하는 경우
+ */
+export const flexJustifyBetween = css`
+    display: flex;
+    justify-content: space-between;
+`
+
+/**
  * @description 스크롤에 영향을 받지 않는 영역을 만드는 부분이 몇 있어 공용 스타일로 분리
  */
 export const stickyPositionStyle = css`

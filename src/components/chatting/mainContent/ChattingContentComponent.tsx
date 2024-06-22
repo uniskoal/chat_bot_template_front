@@ -1,8 +1,10 @@
-import { ProfileImg, decideWidthAndHeight, flexAlignCenter, flexColumnDirection, textBase } from "@/styles/CommonStyles"
+import { ProfileImg, decideWidthAndHeight, flexAlignCenter, flexColumnDirection, flexJustifyBetween, textBase } from "@/styles/CommonStyles"
 import { styled } from "styled-components"
 import { ChattingContentUserType } from "@/constants/enum"
-import { ChattingContentComponentPropsType } from "@/types/components/chattingContentComponent"
 import chatSinSungIcon from "@/assets/images/shinsungIcon.png"
+import { ChattingContentComponentPropsType } from "@/types/components/ChattingContentComponentType"
+import { useEffect, useState } from "react"
+import useModal from "@/hooks/modal/useModal"
 
 const ChattingContentContainer = styled.div`
     ${ decideWidthAndHeight('100%' , '') }
@@ -66,7 +68,49 @@ const ChattingQuestionContent = styled.div`
     max-width: 95%;
 `
 
-const ChattingContentComponent = (props: ChattingContentComponentPropsType) => {
+const ChattingReference = styled.div`
+    padding: 0.5rem;
+    border-width: 1px;
+    border-color: ${ props => props.theme.menuBoxBorderColor };
+    border-radius: 0.25rem;
+    margin-top: 0.75rem;
+    box-shadow: 4px 4px ${ props => props.theme.menuBoxBorderShadowSpread } ${ props => props.theme.menuBoxBorderShadowColor };
+
+    & > div:first-child {
+        ${ flexJustifyBetween }
+        padding: 0.5rem;
+    }
+
+    svg {
+        transition: transform 0.1s ease;
+    }
+`
+
+const ChattingReferenceList = styled.div`
+    overflow: hidden;
+
+    & > div {
+        ${ flexJustifyBetween }
+        padding: 0.5rem;
+    }
+
+    & > div:frist-child {
+        padding: 0 0.5rem;
+    }
+`
+
+{/* <button type="button" onClick={openGuideModal}>모달 열기[오버레이 O]</button> */}
+
+const ChattingContentComponent = ({ props } : { props : ChattingContentComponentPropsType}) => {
+    /** 참고 문서 내용 토글용 상태 */
+    const [ toggleState , setToggleState ] = useState(false);
+    /** 모달 제어 */
+    const { openGuideModal } = useModal();
+
+    const toggle = () => {
+        setToggleState(prev => !prev);
+    }
+
     return (
         <ChattingContentContainer>
             <div>
@@ -95,6 +139,31 @@ const ChattingContentComponent = (props: ChattingContentComponentPropsType) => {
                                 <ChattingQuestionContent dangerouslySetInnerHTML={{ __html: props.description }}></ChattingQuestionContent>
                             </div>
                         </ChattingQuestion>
+                        { props.referenceDocInfo 
+                        ?
+                            <ChattingReference>
+                                <div>
+                                    <span>참고 문서 확인 [{props.referenceDocInfo.file_name}]</span>
+                                    <button onClick={toggle}>
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" style={{ transform: toggleState ? 'rotate(-180deg)' : 'rotate(0deg)'}}>
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <ChattingReferenceList style={{ maxHeight: toggleState ? '100%' : '0' }}>
+                                    { 
+                                        props.referenceDocInfo.meta_data.map((props , index) => 
+                                            <div key={index}>
+                                                <span>페이지 번호: {props.page}</span>
+                                                <button type="button" onClick={() => openGuideModal(props.context)}>내용 확인</button>
+                                            </div>
+                                        )
+                                    }
+                                </ChattingReferenceList>
+                            </ChattingReference> 
+                        :
+                            null
+                        }
                     </ChattingQuestionContainer>
                 </div>
             </div>

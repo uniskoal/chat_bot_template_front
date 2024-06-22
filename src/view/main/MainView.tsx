@@ -86,8 +86,6 @@ const MainView = () => {
     const { theme , changeTheme } = useChangeTheme();
     /** 메뉴 이동 */
     const { navigateChatBotMenu , navigateLogin } = useMenuNavigation();
-    /** 모달 제어 */
-    const { openGuideModal , openReferencesModal } = useModal();
     
     return (
         <MainViewContainer>
@@ -139,8 +137,6 @@ const MainView = () => {
                         </MenuButton>
                     </MainMenuListContainer>
                 </section>
-                <button type="button" onClick={openGuideModal}>모달 열기[오버레이 O]</button>
-                <button type="button" onClick={openReferencesModal}>모달 열기[오버레이 X]</button>
             </MainContentContainer>
         </MainViewContainer>
     )

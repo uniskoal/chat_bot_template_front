@@ -1,3 +1,4 @@
+import { ModalStateType } from "@/types/store/commonStore";
 import { atom } from "recoil";
 
 /** 라이트/다크모드 제어용 상태 */
@@ -13,7 +14,7 @@ export const sideBarState = atom({
 });
 
 /** 모달을 열 떄의 필요한 상태 모음 */
-export const modalState = atom({
+export const modalState = atom<ModalStateType>({
     key: 'modal',
     default: {
         isOpen: false,
@@ -22,6 +23,5 @@ export const modalState = atom({
         buttons: [
             { buttonText: '닫기' , active: null }
         ],
-        overlay: false
     }
 })

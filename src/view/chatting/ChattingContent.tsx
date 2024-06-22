@@ -4,11 +4,11 @@ import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection, flexJustify
 import styled from "styled-components"
 import React, { useEffect, useRef, useState } from "react"
 import MainFirstView from "@/components/chatting/mainContent/MainFirstView"
-import axios from '@/api/axiosHandler';
 import ChattingContentComponent from "@/components/chatting/mainContent/ChattingContentComponent"
-import { ChattingContentComponentPropsType } from "@/types/components/chattingContentComponent"
 import { ChattingContentUserType } from "@/constants/enum";
 import { keyDownEnter } from "@/helper/keyDownEventList"
+import { requestChatResponse } from "@/api/apis/chattingApis"
+import { ChattingContentComponentPropsType } from "@/types/components/ChattingContentComponentType"
 
 const ChattingMainContentContainer = styled.main`
     ${ decideWidthAndHeight('100%' ,'100%') };
@@ -202,7 +202,7 @@ const ChattingContent = () => {
     /** Observer 객체를 담는 변수 */
     let textArea: React.MutableRefObject<Element | HTMLTextAreaElement | null> = useRef(null);
     /** 채팅 내용을 담을 배열 */
-    const [chatList , setChatList] = useState<React.ReactElement<ChattingContentComponentPropsType>[]>([]); 
+    const [chatList , setChatList] = useState<ChattingContentComponentPropsType[]>([]); 
 
     /** 채팅창 입력 시 높이값 조정 */
     const resizeHeightChattingForm = (target: EventTarget & HTMLTextAreaElement) => {
@@ -234,7 +234,7 @@ const ChattingContent = () => {
 
     /** 사용자가 입력한 질문을 배열에 저장하고 내용값 초기화 */
     const saveUserChatContent = (props: ChattingContentComponentPropsType) => {
-        setChatList(chatList => [...chatList , ChattingContentComponent({ userType: props.userType , description: props.description })]);
+        setChatList(chatList => [...chatList , props]);
     }
 
     /** 채팅 보내기
@@ -246,9 +246,9 @@ const ChattingContent = () => {
         /** 질문 내용 초기화 */
         setQuestionContent('');
         /** 입력한 질문 GPT 에게 요청 / 파라미터/응답 값은 임시로 정해놨음 */
-        const response: { data: { description: string } } = await axios.post('/Item/' , { id: '1' , description: questionContent });
+        const response = await requestChatResponse({ id: '1' , description: questionContent })
         /** 응답받은 답변 저장 */
-        saveUserChatContent({ userType: ChattingContentUserType.GPT , description: response.data.description})
+        saveUserChatContent({ userType: ChattingContentUserType.GPT , description: response.description , referenceDocInfo: response.referenceDocInfo })
     }
 
     /** 채팅 높이가 최대 영역에 달했을 때 스크롤 바가 생기도록 이벤트 설정 */
@@ -265,10 +265,6 @@ const ChattingContent = () => {
         }
     }, []); 
 
-    useEffect(() => {
-        console.log(chatList.length);
-    }, [chatList])
-
     return (
         <ChattingMainContentContainer>
             <div>
@@ -283,7 +279,7 @@ const ChattingContent = () => {
                                 {/* 채팅 내용 및 메인 화면 */}
                                 { chatList.length > 0 
                                 ? 
-                                    chatList.map((component , index) => <div key={index}>{component}</div>)
+                                    chatList.map((props , index) => <ChattingContentComponent key={index} props={props}/>)
                                 :
                                    <MainFirstView/>
                                 }
