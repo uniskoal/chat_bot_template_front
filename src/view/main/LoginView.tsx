@@ -143,8 +143,8 @@ const LoginView = () => {
                                     <input
                                         type="text"
                                         maxLength={20}
-                                        placeholder="아이디"
-                                        title="아이디"
+                                        placeholder="이름"
+                                        title="이름"
                                         name="login_id"
                                     ></input>
                                 </div>
@@ -157,8 +157,8 @@ const LoginView = () => {
                                     <input
                                         type="password"
                                         maxLength={20}
-                                        placeholder="비밀번호"
-                                        title="비밀번호"
+                                        placeholder="사번"
+                                        title="사번"
                                         name="login_password"
                                     ></input>
                                     <span></span>

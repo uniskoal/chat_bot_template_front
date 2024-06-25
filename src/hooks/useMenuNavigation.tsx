@@ -8,21 +8,33 @@ const useMenuNavigation = () => {
     const navigateMain = () => {
         navigate('/main');
     }
+
+    /** 로그인 화면으로 이동 */
+    const navigateLogin = () => {
+        navigate('/login');
+    }
     
     /** 챗봇 화면으로 이동 */
     const navigateChatBotMenu = () => {
         navigate('/chat');
     }
 
+    /** Q&A 화면으로 이동 */
+    const navigateQnA = () => {
+        navigate('/QnA');
+    }
+
     /** 로그인 화면으로 이동 */
-    const navigateLogin = () => {
-        navigate('/login');
+    const navigateFileSearch = () => {
+        navigate('/FileSearch');
     }
 
     return {
+        navigateLogin,
         navigateMain,
         navigateChatBotMenu,
-        navigateLogin
+        navigateQnA,
+        navigateFileSearch
     }
 }
 

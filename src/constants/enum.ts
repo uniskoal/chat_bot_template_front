@@ -7,3 +7,8 @@ export const enum ChattingContentUserType {
     USER = '사용자',
     GPT = 'GPT'
 }
+
+export const enum QnAContentUserType {
+    USER = '사용자',
+    SBERT = 'SBERT'
+}

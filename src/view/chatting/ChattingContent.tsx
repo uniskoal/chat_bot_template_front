@@ -345,7 +345,7 @@ const ChattingContent = () => {
                     </ChattingFormContainer>
                     {/* 하단 GPT 설명 */}
                     <ChattingCautionaryText>
-                        <span>GPT can make mistakes. Consider checking important information.</span>
+                        <span>SHINSUNG_GPT can make mistakes. Consider checking important information.</span>
                     </ChattingCautionaryText>
                 </ChattingMainContent>
             </div>

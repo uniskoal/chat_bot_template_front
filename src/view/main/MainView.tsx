@@ -85,7 +85,7 @@ const MainView = () => {
     /** 라이트/다크 모드 제어용 상태 */
     const { theme , changeTheme } = useChangeTheme();
     /** 메뉴 이동 */
-    const { navigateChatBotMenu , navigateLogin } = useMenuNavigation();
+    const { navigateLogin , navigateChatBotMenu , navigateQnA , navigateFileSearch } = useMenuNavigation();
     
     return (
         <MainViewContainer>
@@ -123,14 +123,14 @@ const MainView = () => {
                         <MenuButton onClick={navigateChatBotMenu} svg={chatbot}>
                             <img/>
                             <MenuTitle>챗봇</MenuTitle>
-                            <MenuDescription>기업 내부 정보를<br/> 빠르게 알려주는 챗봇입니다</MenuDescription>
+                            <MenuDescription>기업 내부 정보를<br/> 빠르게 알려주는 챗봇입니다.</MenuDescription>
                         </MenuButton>
-                        <MenuButton svg={qna} $marginLeft>
+                        <MenuButton onClick={navigateQnA} svg={qna} $marginLeft>
                             <img/>
                             <MenuTitle>Q&A</MenuTitle>
                             <MenuDescription>키워드를 입력하시면<br/>해당 키워드와 연관된 질문과 답변을 출력해줍니다.</MenuDescription>
                         </MenuButton>
-                        <MenuButton svg={searchDocument} $marginLeft>
+                        <MenuButton onClick={navigateFileSearch} svg={searchDocument} $marginLeft>
                             <img/>
                             <MenuTitle>문서 검색</MenuTitle>
                             <MenuDescription>찾고자 하는 키워드 및 내용을 입력해주시면<br/>해당 내용에 적합한 문서를 찾아줍니다.</MenuDescription>
