@@ -12,3 +12,8 @@ export const enum QnAContentUserType {
     USER = '사용자',
     SBERT = 'SBERT'
 }
+
+export const enum SearchContentUserType {
+    USER = '사용자',
+    SBERT = 'SBERT'
+}

@@ -1,7 +1,7 @@
 import App from "@/App";
 import ChattingAiContainer from "@/view/chatting/ChattingAiContainer";
-import QnAMainContent from "@/view/QnA/QnAMainContent";
-// import FileSearchAiContent from "@/view/FileSearch/FileSearchAiContent";
+import QnAMainAiContent from "@/view/QnA/QnAMainAiContent";
+import FileSearchAiContent from "@/view/FileSearch/FileSearchAiContent";
 import LoginView from "@/view/main/LoginView";
 import MainView from "@/view/main/MainView";
 import { Navigate, createBrowserRouter } from "react-router-dom";
@@ -29,12 +29,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/QnA',
-                element: <QnAMainContent/>
+                element: <QnAMainAiContent/>
+            },
+            {
+                path: '/FileSearch',
+                element: <FileSearchAiContent/>
             }
-            // {
-            //     path: '/FileSearch',
-            //     element: <FileSearchViewMain/>
-            // }
         ]
     },
 ])
