@@ -1,13 +1,13 @@
 import QnAView from "@/components/chatting/mainContent/QnAMainView";
 import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection, flexJustifyCenter, textBase } from "@/styles/CommonStyles";
 import styled from "styled-components";
-import chatSinSungIcon from "@/assets/images/shinsungIcon.png";
 import React, { useEffect, useRef, useState } from "react";
 import { QnAContentComponentPropsType } from "@/types/components/QnAContentComponentType";
 import { requestQnAResponse } from "@/api/apis/QnAApis";
 import { QnAContentUserType } from "@/constants/enum";
 import { keyDownEnter } from "@/helper/keyDownEventList";
 import MainFirstView from "@/components/chatting/mainContent/MainFirstView_QnA";
+import QnAContentComponent from "@/components/chatting/mainContent/QnAContentComponent ";
 
 const QnAMainContentContainer = styled.main`
     ${decideWidthAndHeight('100%', '100%')};
@@ -221,13 +221,13 @@ const QnAMainContent = () => {
     */
     const submitQuestion = async () => {
         /** 키워드 및 문장 저장 */
-        saveUserChatContent({ userType: QnAContentUserType.USER, keyword: QnAContent });
+        saveUserChatContent({ userType: QnAContentUserType.USER , key_word: QnAContent});
         /** 키워드, 문장 초기화 */
         setQnAContent('');
         /** 입력한 키워드 및 문장 백엔드로 요청 */
-        const response = await requestQnAResponse({ id: '1', keyword: QnAContent });
+        const response = await requestQnAResponse({ id: '1', key_word: QnAContent, number: '1' });
         /** 응답 답변 저장 */
-        saveUserChatContent({ userType: QnAContentUserType.SBERT, keyword: response.keyword });
+        saveUserChatContent({ userType: QnAContentUserType.SBERT , key_word: response.key_word, answer: response.answer});
     };
 
     /** 채팅 높이가 최대 영역에 달했을 때 스크롤 바가 생기도록 이벤트 설정 */
@@ -252,10 +252,10 @@ const QnAMainContent = () => {
                         <div>
                         <QnAMainScroll style={ { overflowY: (chatList.length > 0) ? 'scroll' : 'hidden'}}>
                                 {/* QnA 내용 및 메인 화면 */}
-                                {/* { chatList.length > 0 
+                                { chatList.length > 0 
                                 ? 
-                                    // chatList.map((props , index) => <QnAContentComponent key={index} props={props}/>)
-                                */
+                                    chatList.map((props , index) => <QnAContentComponent key={index} props={props}/>)
+                                :
                                    <MainFirstView/>
                                 }
                         </QnAMainScroll>

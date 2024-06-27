@@ -8,6 +8,7 @@
  */
 export interface QnAResponseData {
     id: string,
-    keyword: string
+    key_word: string,
+    answer: string
 
 }
