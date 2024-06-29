@@ -195,14 +195,17 @@ const ChattingCautionaryText = styled.div`
 `
 
 const ChattingContent = () => {
+    /** 채팅 영역 */
+    const chattingContentRef = useRef<HTMLDivElement | null>(null);
     /** 질문 내용을 담을 변수 */
     const [ questionContent , setQuestionContent ] = useState('');
+    /** 채팅 내용을 담을 배열 */
+    const [chatList , setChatList] = useState<ChattingContentComponentPropsType[]>([]); 
     /** 질문 입력 창 높이 조절을 위한 요소 추출 */
     const questionForm = useRef<HTMLTextAreaElement | null>(null);
     /** Observer 객체를 담는 변수 */
     let textArea: React.MutableRefObject<Element | HTMLTextAreaElement | null> = useRef(null);
-    /** 채팅 내용을 담을 배열 */
-    const [chatList , setChatList] = useState<ChattingContentComponentPropsType[]>([]); 
+    
 
     /** 채팅창 입력 시 높이값 조정 */
     const resizeHeightChattingForm = (target: EventTarget & HTMLTextAreaElement) => {
@@ -232,23 +235,33 @@ const ChattingContent = () => {
         }
     });
 
-    /** 사용자가 입력한 질문을 배열에 저장하고 내용값 초기화 */
-    const saveUserChatContent = (props: ChattingContentComponentPropsType) => {
-        setChatList(chatList => [...chatList , props]);
-    }
-
     /** 채팅 보내기
      * @description 임시적으로 채팅을 보냈을 때, 사용자 유형과 내용을 배열에 담아 보여주는 정도로만 구현
     */
     const submitQuestion = async () => {
-        /** 질문 저장 */
-        saveUserChatContent({ userType: ChattingContentUserType.USER , description: questionContent})
-        /** 질문 내용 초기화 */
-        setQuestionContent('');
-        /** 입력한 질문 GPT 에게 요청 / 파라미터/응답 값은 임시로 정해놨음 */
-        const response = await requestChatResponse({ id: '1' , description: questionContent })
-        /** 응답받은 답변 저장 */
-        saveUserChatContent({ userType: ChattingContentUserType.GPT , description: response.description , referenceDocInfo: response.referenceDocInfo })
+        try {
+            /** 질문 저장 */
+            setChatList(chatList => [...chatList , { userType: ChattingContentUserType.USER , description: questionContent }])
+            /** 질문 내용 초기화 */
+            setQuestionContent('');
+            /** 응답 전 로딩 */
+            setChatList(chatList => [...chatList , { userType: ChattingContentUserType.GPT , description: '응답 준비중...' }])
+            /** 입력한 질문 GPT 에게 요청 / 파라미터/응답 값은 임시로 정해놨음 */
+            const response = await requestChatResponse({ id: '1' , description: questionContent })
+            /** 응답받은 답변으로 업데이트 */
+            setChatList(chatList => {
+                const newItem = [...chatList];
+
+                newItem[chatList.length - 1] = { userType: ChattingContentUserType.GPT , description: response.description , referenceDocInfo: response.referenceDocInfo }
+                return newItem
+            })
+        }
+        catch(error: unknown) {
+            // 예외 처리 추가 예정
+        }
+        finally {
+            // 로딩 제거
+        }
     }
 
     /** 채팅 높이가 최대 영역에 달했을 때 스크롤 바가 생기도록 이벤트 설정 */
@@ -265,6 +278,14 @@ const ChattingContent = () => {
         }
     }, []); 
 
+    useEffect(() => {
+        const container = chattingContentRef.current;
+        if (container) {
+            console.log('???' , container.scrollTop , container.scrollHeight);
+            container.scrollTop = container.scrollHeight;
+        }
+      }, [chatList]);
+
     return (
         <ChattingMainContentContainer>
             <div>
@@ -273,7 +294,7 @@ const ChattingContent = () => {
                     {/* 결과 목록 */}
                     <div>
                         <div>
-                            <ChattingMainScroll style={ { overflowY: (chatList.length > 0) ? 'scroll' : 'hidden'}}> 
+                            <ChattingMainScroll style={ { overflowY: (chatList.length > 0) ? 'scroll' : 'hidden'}} ref={chattingContentRef}> 
                                 {/* 헤더 [옵션 및 GPT 모델 변경] */}
                                 <ChattingMainHeaderView/>
                                 {/* 채팅 내용 및 메인 화면 */}
