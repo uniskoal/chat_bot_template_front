@@ -1,9 +1,25 @@
-import { ProfileImg, decideWidthAndHeight, flexAlignCenter, flexColumnDirection, flexJustifyBetween, textBase } from "@/styles/CommonStyles"
+import { decideWidthAndHeight, flexColumnDirection, flexJustifyBetween, textBase } from "@/styles/CommonStyles"
 import { styled } from "styled-components"
-import { QnAContentUserType } from "@/constants/enum"
 import { QnAContentComponentPropsType } from "@/types/components/QnAContentComponentType"
-import { useEffect, useState } from "react"
-import useModal from "@/hooks/modal/useModal"
+import { useState } from "react"
+
+const ChattingContentContainer = styled.div`
+    ${ decideWidthAndHeight('100%' , '') }
+
+    & > div:first-child {
+        ${ textBase('1rem' , '1.5rem') };
+        padding: 0.5rem 1.25rem;
+    }
+
+    & > div > div {
+        ${ textBase('1rem' , '1.5rem') };
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 0.75rem;
+        max-width: 54rem;
+    }
+`
 
 const ChattingQuestionContainer = styled.div`
     ${ decideWidthAndHeight('100%' , '') };
@@ -52,27 +68,31 @@ const QnAContentComponent = ({ props } : { props : QnAContentComponentPropsType 
     }
 
     return (
-    <ChattingQuestionContainer>
-        
-        {props.userType === QnAContentUserType.SBERT && ( 
-            <ChattingReference>
+        <ChattingContentContainer>
+            <div>
                 <div>
-                    <span>{props.key_word}</span>
-                    <button onClick={toggle}>
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" style={{ transform: toggleState ? 'rotate(-180deg)' : 'rotate(0deg)'}}>
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7"/>
-                        </svg>
-                    </button>
+                    <ChattingQuestionContainer>
+                        <ChattingReference>
+                            <div>
+                                <span>{props.key_word}</span>
+                                <button onClick={toggle}>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" style={{ transform: toggleState ? 'rotate(-180deg)' : 'rotate(0deg)'}}>
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <ChattingReferenceList style={{ maxHeight: toggleState ? '100%' : '0' }}>
+                                { 
+                                    <div>
+                                        <span>{ props.answer }</span> 
+                                    </div>
+                                }
+                            </ChattingReferenceList>
+                        </ChattingReference> 
+                    </ChattingQuestionContainer>
                 </div>
-                <ChattingReferenceList style={{ maxHeight: toggleState ? '100%' : '0' }}>
-                    { 
-                        <span>{ props.answer}</span> 
-                    }
-                </ChattingReferenceList>
-            </ChattingReference> 
-            )}
-      
-    </ChattingQuestionContainer>
+            </div>
+        </ChattingContentContainer>
     )
 }
 

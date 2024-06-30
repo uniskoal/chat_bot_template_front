@@ -1,4 +1,4 @@
-import ChattingMainHeaderView from "@/components/chatting/mainContent/ChattingMainHeaderView"
+import ChattingMainHeaderView from "@/components/chatting/mainContent/headerView/ChattingMainHeaderView"
 import SideBarSlider from "@/components/chatting/sidebar/SideBarSlider"
 import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection, flexJustifyCenter, textBase } from "@/styles/CommonStyles"
 import styled from "styled-components"
@@ -258,9 +258,6 @@ const ChattingContent = () => {
         }
         catch(error: unknown) {
             // 예외 처리 추가 예정
-        }
-        finally {
-            // 로딩 제거
         }
     }
 

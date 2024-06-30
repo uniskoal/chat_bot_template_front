@@ -4,11 +4,11 @@
  * src/api/apis/chattingApis.ts -> requestChatResponse API 
  * 
  * @type id / 채팅방 고유 번호
- * @type keyword / 응답 내용
+ * @type answer_list / 질문 목록
+ * @type answer_list -> key_word / 질문 이름
+ * @type answer_list -> answer / 답변 내용
  */
 export interface QnAResponseData {
     id: string,
-    key_word: string,
-    answer: string
-
+    answer_list: { key_word: string; answer: string;}[]
 }

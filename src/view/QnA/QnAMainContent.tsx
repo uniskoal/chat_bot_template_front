@@ -1,13 +1,12 @@
-import QnAView from "@/components/chatting/mainContent/QnAMainView";
-import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection, flexJustifyCenter, textBase } from "@/styles/CommonStyles";
+import { decideWidthAndHeight, flexAlignCenter, flexColumnDirection, textBase } from "@/styles/CommonStyles";
 import styled from "styled-components";
 import React, { useEffect, useRef, useState } from "react";
 import { QnAContentComponentPropsType } from "@/types/components/QnAContentComponentType";
 import { requestQnAResponse } from "@/api/apis/QnAApis";
-import { QnAContentUserType } from "@/constants/enum";
+import QnAMainHeaderView from "@/components/chatting/mainContent/headerView/QnAMainHeaderView";
 import { keyDownEnter } from "@/helper/keyDownEventList";
-import MainFirstView from "@/components/chatting/mainContent/MainFirstView_QnA";
 import QnAContentComponent from "@/components/chatting/mainContent/QnAContentComponent ";
+import MainFirstView from "@/components/chatting/mainContent/MainFirstView";
 
 const QnAMainContentContainer = styled.main`
     ${decideWidthAndHeight('100%', '100%')};
@@ -15,25 +14,21 @@ const QnAMainContentContainer = styled.main`
     background-color: ${props => props.theme.mainViewBackgroundColor};
     position: relative;
     overflow: hidden;
+`
 
-    & > div:first-child {
-        flex: 1 1 0%;
-        ${decideWidthAndHeight('100%', '100%')};
-        position: relative;
-        overflow: auto;
-    }
+const QnAMain = styled.div`
+    ${decideWidthAndHeight('100%', '100%')};
+    ${ flexColumnDirection };
+    position: relative;
+    overflow: auto;
 `
 
 const QnAFormContainer = styled.div`
-    ${decideWidthAndHeight('calc(100% - 0.5rem)', '')};
+    ${ decideWidthAndHeight('calc(100% - 0.5rem)' ,'') };
     border-color: transparent;
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    position: absolute;
-    top: 3.125rem; // 3.125rem = 50px
-    left: 0;
-    right: 0;
 `
 
 const QnAFormPadding = styled.div`
@@ -130,17 +125,12 @@ const QnASubmitButton = styled.button`
     }
 `
 
-const QNAMainContent = styled.div`
-    ${decideWidthAndHeight('', '100%')};
-    ${flexColumnDirection};
+const QnAResultContainer = styled.div`
+    flex: 1 1 0%;
+    overflow: hidden;
 
     & > div:first-child {
-        flex: 1 1 0%;
-        overflow: hidden;
-    }
-
-    & > div:first-child > div {
-        ${decideWidthAndHeight('', '100%')};
+        ${ decideWidthAndHeight('' , '100%') }
         position: relative;
     }
 `
@@ -180,7 +170,7 @@ const QnAMainContent = () => {
     /** Observer 객체를 담는 변수 */
     let textArea: React.MutableRefObject<Element | HTMLTextAreaElement | null> = useRef(null);
     /** QnA 내용을 담을 배열 */
-    const [chatList, setChatList] = useState<QnAContentComponentPropsType[]>([]);
+    const [answerList, setAnswerList] = useState<QnAContentComponentPropsType[]>([]);
 
     /** 채팅창 입력 시 높이값 조정 */
     const resizeHeightChattingForm = (target: EventTarget & HTMLTextAreaElement) => {
@@ -210,24 +200,21 @@ const QnAMainContent = () => {
         }
     });
 
-    /** 사용자가 입력한 질문을 배열에 저장하고 내용값 초기화 */
-    const saveUserChatContent = (props: QnAContentComponentPropsType) => {
-        setChatList(chatList => [...chatList, props]);
-    };
-
-
     /** 채팅 보내기
      * @keyword 임시적으로 채팅을 보냈을 때, 사용자 유형과 내용을 배열에 담아 보여주는 정도로만 구현
     */
     const submitQuestion = async () => {
-        /** 키워드 및 문장 저장 */
-        saveUserChatContent({ userType: QnAContentUserType.USER , key_word: QnAContent});
-        /** 키워드, 문장 초기화 */
-        setQnAContent('');
-        /** 입력한 키워드 및 문장 백엔드로 요청 */
-        const response = await requestQnAResponse({ id: '1', key_word: QnAContent, number: '1' });
-        /** 응답 답변 저장 */
-        saveUserChatContent({ userType: QnAContentUserType.SBERT , key_word: response.key_word, answer: response.answer});
+        try {
+            /** 키워드, 문장 초기화 */
+            setQnAContent('');
+            /** 입력한 키워드 및 문장 백엔드로 요청 */
+            const response = await requestQnAResponse({ id: '1', key_word: QnAContent, number: '1' });
+            /** 응답 답변 저장 */
+            setAnswerList(response.answer_list)
+        }
+        catch(error: unknown) {
+            // 예외 처리 추가 예정
+        }
     };
 
     /** 채팅 높이가 최대 영역에 달했을 때 스크롤 바가 생기도록 이벤트 설정 */
@@ -246,21 +233,8 @@ const QnAMainContent = () => {
 
     return (
         <QnAMainContentContainer>
-            <QNAMainContent>
-                <QnAView />
-                    <div>
-                        <div>
-                        <QnAMainScroll style={ { overflowY: (chatList.length > 0) ? 'scroll' : 'hidden'}}>
-                                {/* QnA 내용 및 메인 화면 */}
-                                { chatList.length > 0 
-                                ? 
-                                    chatList.map((props , index) => <QnAContentComponent key={index} props={props}/>)
-                                :
-                                   <MainFirstView/>
-                                }
-                        </QnAMainScroll>
-                        </div>
-                    </div>
+            <QnAMainHeaderView/>
+            <QnAMain>
                 <QnAFormContainer>
                     <QnAFormPadding>
                         <QnAingFormMargin>
@@ -268,27 +242,27 @@ const QnAMainContent = () => {
                                 <div>
                                     <div>
                                         <QnATextArea
-                                            id="prompt-textarea"
-                                            ref={QnAForm}
-                                            tabIndex={0}
-                                            data-id="root"
-                                            dir="auto"
-                                            rows={1}
-                                            placeholder="키워드 및 질문을 입력해 주세요."
-                                            value={QnAContent}
-                                            onChange={handleQuestionContent}
-                                            onKeyDown={event => keyDownEnter(event, submitQuestion)}
+                                             id="prompt-textarea"
+                                             ref={QnAForm}
+                                             tabIndex={0}
+                                             data-id="root"
+                                             dir="auto"
+                                             rows={1}
+                                             placeholder="키워드 및 질문을 입력해 주세요."
+                                             value={QnAContent}
+                                             onChange={handleQuestionContent}
+                                             onKeyDown={event => keyDownEnter(event, submitQuestion)}
                                         ></QnATextArea>
                                         <QnASubmitButton
-                                            type="button"
-                                            disabled={!QnAContent}
-                                            onClick={submitQuestion}
+                                             type="button"
+                                             disabled={!QnAContent}
+                                             onClick={submitQuestion}
                                         >
-                                            <span>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                                                </svg>
-                                            </span>
+                                             <span>
+                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                     <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                 </svg>
+                                             </span>
                                         </QnASubmitButton>
                                     </div>
                                 </div>
@@ -296,10 +270,23 @@ const QnAMainContent = () => {
                         </QnAingFormMargin>
                     </QnAFormPadding>
                 </QnAFormContainer>
+                <QnAResultContainer>
+                    <div>
+                        <QnAMainScroll style={ { overflowY: (answerList.length > 0) ? 'scroll' : 'hidden'}}>
+                                {/* QnA 내용 및 메인 화면 */}
+                                { answerList.length > 0 
+                                ? 
+                                    answerList.map((props , index) => <QnAContentComponent key={index} props={props}/>)
+                                :
+                                <MainFirstView/>
+                                }
+                        </QnAMainScroll>
+                    </div>
+                </QnAResultContainer>
                 <ChattingCautionaryText>
                     <span>SHINSUNG_GPT can make mistakes. Consider checking important information.</span>
                 </ChattingCautionaryText>
-            </QNAMainContent>
+            </QnAMain>
         </QnAMainContentContainer>
     );
 };

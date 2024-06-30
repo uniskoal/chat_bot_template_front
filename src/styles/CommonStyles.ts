@@ -51,6 +51,14 @@ export const flexJustifyEnd = css`
 `
 
 /**
+ * @description flex 디자인 적용시에 justify-content 속성을 flex-end로 적용하는 경우
+ */
+export const flexJustifyFlexEnd = css`
+    display: flex;
+    justify-content: flex-end; 
+`
+
+/**
  * @description flex 디자인 적용시에 justify-content 속성을 space-between로 적용하는 경우
  */
 export const flexJustifyBetween = css`
